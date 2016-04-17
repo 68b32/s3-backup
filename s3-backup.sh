@@ -6,6 +6,7 @@ export SIGN_PASSPHRASE=""
 export S3_USE_SIGV4="True"
 
 BUCKET="s3://s3.eu-central-1.amazonaws.com/<bucketname>"
+FILE_LIST="/etc/backup/file.list"
 GPG_ENCRYPT="<keyid>"
 GPG_SIGN="<keyid>"
 KEEP_BACKUP_FOR="2M"
@@ -42,9 +43,8 @@ fi
 
 # Create the backup
 duplicity ${OPTION_FULL} ${GENERAL_OPTIONS} \
-	--include-filelist /etc/backup/filelist.list \
+	--include-filelist "${FILE_LIST}" \
 	--exclude '**' \
-	-v6 \
 	/ "${DESTINATION}"
 
 # List available backup chains
